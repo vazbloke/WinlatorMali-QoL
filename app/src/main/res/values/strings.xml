@@ -148,6 +148,7 @@
     <string name="old">old</string>
     <string name="_new">new</string>
     <string name="task_manager">Task Manager</string>
+    <string name="quit_after_closing_external_shortcut">Quit Winlator on close, if launched from external shortcut</string>
     <string name="process_name">Process Name</string>
     <string name="pid">PID</string>
     <string name="memory">Memory</string>
@@ -220,6 +221,9 @@
     <string name="enable_wine_debug">Enable Wine debug</string>
     <string name="enable_box86_64_logs">Enable Box86/Box64 logs</string>
     <string name="export">Export</string>
+    <string name="export_for_frontend">Export for front end</string>
+    <string name="shortcut_exported_to">Shortcut exported to</string>
+    <string name="unable_to_export_shortcut">Unable to export shortcut</string>
     <string name="logs_exported_to">Logs exported to</string>
     <string name="general">General</string>
     <string name="msg_warning_install_wine">Warning: Installing a new version of Wine is recommended for testing purposes only.</string>

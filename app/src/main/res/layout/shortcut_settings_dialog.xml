@@ -314,6 +314,13 @@
                         android:id="@+id/SDInputMapperType"
                         android:layout_width="match_parent"
                         android:entries="@array/dinput_mapper_type_entries" />
+
+                    <CheckBox
+                        android:id="@+id/CBShowTouchscreenControls"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/show_touchscreen_controls"
+                        android:layout_marginTop="4dp" />
                 </LinearLayout>
 
                 <TextView

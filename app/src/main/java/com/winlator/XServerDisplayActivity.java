@@ -343,7 +343,12 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
     private void exit() {
         winHandler.stop();
         if (environment != null) environment.stopEnvironmentComponents();
-        AppUtils.restartApplication(this);
+
+        if (getIntent().getBooleanExtra("external_shortcut", false) && preferences.getBoolean("quit_after_closing_external_shortcut", false)) {
+            finishAffinity();
+            System.exit(0);
+        }
+        else AppUtils.restartApplication(this);
     }
 
     private void setupWineSystemFiles() {
@@ -499,7 +504,11 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
             String controlsProfile = shortcut.getExtra("controlsProfile");
             if (!controlsProfile.isEmpty()) {
                 ControlsProfile profile = inputControlsManager.getProfile(Integer.parseInt(controlsProfile));
-                if (profile != null) showInputControls(profile);
+                if (profile != null) {
+                    showInputControls(profile);
+                    boolean showTouchscreenControls = shortcut.getExtra("showTouchscreenControls", "1").equals("1");
+                    inputControlsView.setVisibility(showTouchscreenControls ? View.VISIBLE : View.GONE);
+                }
             }
         }
 

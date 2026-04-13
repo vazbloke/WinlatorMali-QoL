@@ -110,6 +110,9 @@ public class SettingsFragment extends Fragment {
         final CheckBox cbUseDRI3 = view.findViewById(R.id.CBUseDRI3);
         cbUseDRI3.setChecked(preferences.getBoolean("use_dri3", true));
 
+        final CheckBox cbQuitAfterClosingExternalShortcut = view.findViewById(R.id.CBQuitAfterClosingExternalShortcut);
+        cbQuitAfterClosingExternalShortcut.setChecked(preferences.getBoolean("quit_after_closing_external_shortcut", false));
+
         final CheckBox cbEnableWineDebug = view.findViewById(R.id.CBEnableWineDebug);
         cbEnableWineDebug.setChecked(preferences.getBoolean("enable_wine_debug", false));
 
@@ -148,6 +151,7 @@ public class SettingsFragment extends Fragment {
             editor.putString("box86_preset", Box86_64PresetManager.getSpinnerSelectedId(sBox86Preset));
             editor.putString("box64_preset", Box86_64PresetManager.getSpinnerSelectedId(sBox64Preset));
             editor.putBoolean("use_dri3", cbUseDRI3.isChecked());
+            editor.putBoolean("quit_after_closing_external_shortcut", cbQuitAfterClosingExternalShortcut.isChecked());
             editor.putFloat("cursor_speed", sbCursorSpeed.getProgress() / 100.0f);
             editor.putBoolean("enable_wine_debug", cbEnableWineDebug.isChecked());
             editor.putBoolean("enable_box86_64_logs", cbEnableBox86_64Logs.isChecked());
