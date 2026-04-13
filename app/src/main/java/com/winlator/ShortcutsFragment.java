@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,10 @@ import com.winlator.container.ContainerManager;
 import com.winlator.container.Shortcut;
 import com.winlator.contentdialog.ContentDialog;
 import com.winlator.contentdialog.ShortcutSettingsDialog;
+import com.winlator.core.AppUtils;
+import com.winlator.core.FileUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,7 +123,10 @@ public class ShortcutsFragment extends Fragment {
             listItemMenu.inflate(R.menu.shortcut_popup_menu);
             listItemMenu.setOnMenuItemClickListener((menuItem) -> {
                 int itemId = menuItem.getItemId();
-                if (itemId == R.id.shortcut_settings) {
+                if (itemId == R.id.shortcut_export_for_frontend) {
+                    exportShortcutForFrontend(shortcut);
+                }
+                else if (itemId == R.id.shortcut_settings) {
                     (new ShortcutSettingsDialog(ShortcutsFragment.this, shortcut)).show();
                 }
                 else if (itemId == R.id.shortcut_remove) {
@@ -131,6 +138,24 @@ public class ShortcutsFragment extends Fragment {
                 return true;
             });
             listItemMenu.show();
+        }
+
+        private void exportShortcutForFrontend(Shortcut shortcut) {
+            Context context = getContext();
+            if (context == null) return;
+
+            shortcut.putExtra("container_id", String.valueOf(shortcut.container.id));
+            shortcut.saveData();
+
+            File exportDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "WinlatorMali/FrontendShortcuts");
+            if (!exportDir.exists()) exportDir.mkdirs();
+            File exportFile = new File(exportDir, shortcut.file.getName());
+            boolean success = FileUtils.copy(shortcut.file, exportFile);
+
+            if (success) {
+                AppUtils.showToast(context, context.getString(R.string.shortcut_exported_to) + " " + exportFile.getPath());
+            }
+            else AppUtils.showToast(context, R.string.unable_to_export_shortcut);
         }
 
         private void runFromShortcut(Shortcut shortcut) {

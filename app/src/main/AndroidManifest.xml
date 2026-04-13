@@ -74,5 +74,31 @@
             android:theme="@style/AppTheme"
             android:exported="false"
             android:screenOrientation="sensor" />
+
+        <activity
+            android:name="com.winlator.shortcutapi.ExternalShortcutLaunchActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme"
+            android:excludeFromRecents="true"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="com.winlator.action.RUN_SHORTCUT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="winlator"
+                    android:host="shortcut" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name="com.winlator.shortcutapi.ExternalShortcutsProvider"
+            android:authorities="${applicationId}.shortcuts"
+            android:exported="true"
+            android:grantUriPermissions="false" />
     </application>
 </manifest>
