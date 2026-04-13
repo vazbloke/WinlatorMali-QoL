@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.winlator.XrActivity;
 import com.winlator.XServerDisplayActivity;
+import com.winlator.container.Container;
 import com.winlator.container.ContainerManager;
 import com.winlator.container.Shortcut;
 import com.winlator.core.FileUtils;
@@ -59,6 +60,7 @@ public class ExternalShortcutLaunchActivity extends AppCompatActivity {
             Intent intent = new Intent(this, XServerDisplayActivity.class);
             intent.putExtra("container_id", shortcut.container.id);
             intent.putExtra("shortcut_path", shortcut.file.getPath());
+            intent.putExtra("external_shortcut", true);
             startActivity(intent);
         } else {
             XrActivity.openIntent(this, shortcut.container.id, shortcut.file.getPath());

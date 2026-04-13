@@ -343,7 +343,12 @@ public class XServerDisplayActivity extends AppCompatActivity implements Navigat
     private void exit() {
         winHandler.stop();
         if (environment != null) environment.stopEnvironmentComponents();
-        AppUtils.restartApplication(this);
+
+        if (getIntent().getBooleanExtra("external_shortcut", false) && preferences.getBoolean("quit_after_closing_external_shortcut", false)) {
+            finishAffinity();
+            System.exit(0);
+        }
+        else AppUtils.restartApplication(this);
     }
 
     private void setupWineSystemFiles() {
