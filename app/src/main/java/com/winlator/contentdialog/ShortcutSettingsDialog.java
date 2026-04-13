@@ -72,6 +72,9 @@ public class ShortcutSettingsDialog extends ContentDialog {
         final CheckBox cbForceFullscreen = findViewById(R.id.CBForceFullscreen);
         cbForceFullscreen.setChecked(shortcut.getExtra("forceFullscreen", "0").equals("1"));
 
+        final CheckBox cbShowTouchscreenControls = findViewById(R.id.CBShowTouchscreenControls);
+        cbShowTouchscreenControls.setChecked(shortcut.getExtra("showTouchscreenControls", "1").equals("1"));
+
         final Spinner sBox86Preset = findViewById(R.id.SBox86Preset);
         Box86_64PresetManager.loadSpinner("box86", sBox86Preset, shortcut.getExtra("box86Preset", shortcut.container.getBox86Preset()));
 
@@ -121,6 +124,7 @@ public class ShortcutSettingsDialog extends ContentDialog {
                 shortcut.putExtra("dxwrapperConfig", !dxwrapperConfig.equals(shortcut.container.getDXWrapperConfig()) ? dxwrapperConfig : null);
                 shortcut.putExtra("audioDriver", !audioDriver.equals(shortcut.container.getAudioDriver())? audioDriver : null);
                 shortcut.putExtra("forceFullscreen", cbForceFullscreen.isChecked() ? "1" : null);
+                shortcut.putExtra("showTouchscreenControls", cbShowTouchscreenControls.isChecked() ? "1" : "0");
 
                 String wincomponents = ContainerDetailFragment.getWinComponents(getContentView());
                 shortcut.putExtra("wincomponents", !wincomponents.equals(shortcut.container.getWinComponents()) ? wincomponents : null);
